@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="header" style="text-align: center;">
+    <h1>毎日自己分析</h1>
+</div>
+
+<div class="container">
+    <div class="item">
+        <h2>日記を追加</h2>
+        <h4>点数は半角二桁、以降は半角1~5</h4>
+        <form method="POST" action="/get_user_input">
+            <label for="date">日にち:</label>
+            <input type="text" id="A" name="A"><br>
+
+            <label for="score">点数:　</label>
+            <input type="number" id="B" name="B"><br>
+
+            <label for="C">よく笑いましたか:　　　　　　　</label>
+            <input type="number" id="C" name="C" min="1" max="5"><br>
+
+            <label for="D">よく怒りましたか:　　　　　　　</label>
+            <input type="number" id="D" name="D" min="1" max="5"><br>
+
+            <label for="E">人とたくさん話しましたか:　　　</label>
+            <input type="number" id="E" name="E" min="1" max="5"><br>
+
+            <label for="F">一人でいる時間が多かったですか:</label>
+            <input type="number" id="F" name="F" min="1" max="5"><br>
+
+            <label for="G">考える時間は多かったですか:　　</label>
+            <input type="number" id="G" name="G" min="1" max="5"><br>
+
+            <label for="H">直感で動くことが多かったですか:</label>
+            <input type="number" id="H" name="H" min="1" max="5"><br>
+
+            <label for="I">何かを発見できましたか:　　　　</label>
+            <input type="number" id="I" name="I" min="1" max="5"><br>
+
+            <label for="J">何かを反省できましたか:　　　　</label>
+            <input type="number" id="J" name="J" min="1" max="5"><br>
+
+            <label for="K">自由記述欄:</label>
+            <textarea id="K" name="K"></textarea><br>
+
+            <input type="submit" value="保存">
+        </form>
+    </div>
+
+    <div class="item">
+        <h2>日記の編集</h2>
+        <form method="POST" action="/edit">
+            <input type="hidden" name="row_index" value="{{ row_index }}">
+            <label for="A">編集したい日を入力:</label>
+            <input type="text" id="A" name="A" value="{{ A }}"><br>
+
+            <h4>変更する内容</h4>
+
+            <label for="score">点数:</label>
+            <input type="number" id="B" name="B"><br>
+
+            <label for="C">よく笑いましたか:　　　　　　　</label>
+            <input type="number" id="C" name="C" min="1" max="5"><br>
+
+            <label for="D">よく怒りましたか:　　　　　　　</label>
+            <input type="number" id="D" name="D" min="1" max="5"><br>
+
+            <label for="E">人とたくさん話しましたか:　　　</label>
+            <input type="number" id="E" name="E" min="1" max="5"><br>
+
+            <label for="F">一人でいる時間が多かったですか:</label>
+            <input type="number" id="F" name="F" min="1" max="5"><br>
+
+            <label for="G">考える時間は多かったですか:　　</label>
+            <input type="number" id="G" name="G" min="1" max="5"><br>
+
+            <label for="H">直感で動くことが多かったですか:</label>
+            <input type="number" id="H" name="H" min="1" max="5"><br>
+
+            <label for="I">何かを発見できましたか:　　　　</label>
+            <input type="number" id="I" name="I" min="1" max="5"><br>
+
+            <label for="J">何かを反省できましたか:　　　　</label>
+            <input type="number" id="J" name="J" min="1" max="5"><br>
+
+            <label for="K">自由記述欄:</label>
+            <textarea id="K" name="K"></textarea><br>
+
+            <input type="submit" value="保存">
+        </form>
+    </div>
+    <div class="item" >
+        <h2>日記を見てみよう</h2>
+
+        <!-- <form method="POST" action="/high_score_day_average"> -->
+        <!-- <a class="button" href="{{ url_for('high_score_day_average') }}">いい日の各項目の平均スコア</a> -->
+        <h4>いい日の各項目の平均スコアを見る</h4>
+        <form method="POST" action="/high_score_day_average">
+            <label for="n_score">任意の点数以上の日の平均スコアを見る:</label>
+            <input type="number" id="n_score" name="n_score" min="1" max="99"><br>
+            <button type="submit">平均スコアを表示</button>
+        </form>
+        <!-- </form> -->
+
+        {% if average_list %}
+            <h2>いい日の各項目の平均点</h2>
+            <p>1日の総合点が {{ n_score }} 点以上での各要素の平均点:</p>
+            <ul>
+            <li>よく笑った: {{ average_list[0] }}</li>
+            <li>よく怒った: {{ average_list[1] }}</li>
+            <li>人とたくさん話した: {{ average_list[2] }}</li>
+            <li>一人でいる時間が多かった: {{ average_list[3] }}</li>
+            <li>考える時間が多かった: {{ average_list[4] }}</li>
+            <li>直感で動くことが多かった: {{ average_list[5] }}</li>
+            <li>発見できた: {{ average_list[6] }}</li>
+            <li>反省できた: {{ average_list[7] }}</li>
+            </ul>
+        {% endif %}
+
+        <h4>いい日の感想を見る</h4>
+        <form method="POST" action="/high_score_day">
+            <label for="target_score">任意の点数以上の日の感想を見る:</label>
+            <input type="number" id="target_score" name="target_score" min="1" max="99"><br>
+            <button type="submit">感想を表示</button>
+            <!-- <input type="submit" value="感想を表示"> -->
+        </form>
+        
+
+    </div>
+</div>
+
+<form method="POST" action="/make_csv">
+    <div style="text-align: right;">
+        <button type="submit">日記の保存場所作成</button>
+    </div> 
+</form>
+{% endblock %}
+

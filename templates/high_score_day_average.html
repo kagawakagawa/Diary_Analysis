@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>高スコアの日平均分析</title>
+</head>
+<body>
+
+    <!-- <h2>{{ n_score }} 点以上の高スコアの日の平均</h2>
+    <p>1日の総合点が {{ n_score }} 点以上での各要素の平均点：</p>
+    <ul>
+        <li>よく笑った: {{ average_list[0] }}</li>
+        <li>よく怒った: {{ average_list[1] }}</li>
+        <li>人とたくさん話した: {{ average_list[2] }}</li>
+        <li>一人でいる時間が多かった: {{ average_list[3] }}</li>
+        <li>考える時間が多かった: {{ average_list[4] }}</li>
+        <li>直感で動くことが多かった: {{ average_list[5] }}</li>
+        <li>発見できた: {{ average_list[6] }}</li>
+        <li>反省できた: {{ average_list[7] }}</li>
+    </ul> -->
+
+
+    {% if average_list %}
+            <h2>{{ n_score }} 点以上の日の平均スコア</h2>
+            <ul>
+                <li>よく笑った:　　　　　　　 {{ average_list[0] }}</li>
+                <li>よく怒った: 　　　　　　　{{ average_list[1] }}</li>
+                <li>人とたくさん話した: 　　　{{ average_list[2] }}</li>
+                <li>一人でいる時間が多かった: {{ average_list[3] }}</li>
+                <li>考える時間が多かった: 　　{{ average_list[4] }}</li>
+                <li>直感で動くことが多かった: {{ average_list[5] }}</li>
+                <li>発見できた:　　　　　　　 {{ average_list[6] }}</li>
+                <li>反省できた:　　　　　　　 {{ average_list[7] }}</li>
+            </ul>
+        {% else %}
+            <p>該当するいい日のデータはありません。</p>
+        {% endif %}
+    
+    <a class="button" href="{{ url_for('index') }}">戻る</a>
+    <!-- <a href="{{ url_for('index') }}">戻る</a> -->
+</body>
+</html>

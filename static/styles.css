@@ -1,0 +1,41 @@
+/* styles.css */
+
+/* ヘッダースタイル */
+header {
+    background-color: red;
+    color: blue;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* ボタンスタイル */
+/* .button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+} */
+
+/* リストスタイル */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+
+    margin-bottom: 10px;
+}
+
+/* フッタースタイル */
+footer {
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* セクションを横並びにするためのスタイル */
+.container {
+    display: flex;
+    gap: 200px;
+}

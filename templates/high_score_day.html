@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ハイスコアの日分析</title>
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            {% if high_score_feedbacks %}
+                <h2>{{ target_score }} 点以上の日の感想</h2>
+                <ul>
+                    {% for feedback in high_score_feedbacks %}
+                        <li>{{ feedback }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>該当するいい日の感想はありません。</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- <h2>{{ n }} 点以上の日</h2>
+    <ul>
+        {% for item in high_score_day_list %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul> -->
+
+    <a class="button" href="{{ url_for('index') }}">戻る</a>
+    <!-- <a href="{{ url_for('index') }}">戻る</a> -->
+</body>
+</html>
